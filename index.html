@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Gustam rheza</title>
+</head>
+<body>
+        <div class="drop cut"></div>
+        <div class="light cut">
+          <div class="flash"></div>
+        </div>
+        <div class="sourceContainer">
+          <div class="source"></div>
+        </div>
+</body>
+    <script>
+        const flash = document.querySelector(".flash");
+const states = [
+  () => {
+    flash.style.transition = "transform 1ms";
+    flash.style.transform = "translateX(-196px) rotate(0deg)";
+  },
+  () => {
+    flash.style.transition = "transform 700ms ease-in-out";
+    setTimeout(() => {
+      flash.style.transform = "translateX(-196px) rotate(-485deg)";
+    }, 100);
+  },
+  () => (flash.style.transform = "translateX(-196px) rotate(-320deg)"),
+  () => (flash.style.transform = "translateX(-196px) rotate(-375deg)"),
+  () => (flash.style.transform = "translateX(-196px) rotate(-355deg)"),
+  () => (flash.style.transform = "translateX(-196px) rotate(-360deg)")
+];
+let currentState = 0;
+const animateToNextState = () => {
+  requestAnimationFrame(() => {
+    states[++currentState % states.length]();
+  });
+};
+flash.addEventListener("transitionend", () => animateToNextState());
+window.onload = () => {
+  animateToNextState();
+};
+
+    </script>
+</html>
